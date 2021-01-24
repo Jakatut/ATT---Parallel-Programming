@@ -68,7 +68,7 @@ namespace A1_Parallel_Programming
         private static void crack(string password)
         {
             Console.WriteLine("*****Non-Parallel Bruteforce*****");
-            for (int i = 0; i < Validation.MaxPasswordLength; ++i)
+            for (int i = Validation.MinPasswordLength; i < Validation.MaxPasswordLength; ++i)
             {
                 // If a match was found, stop the loop.
                 if (runCombinationMatch(i))
@@ -101,7 +101,8 @@ namespace A1_Parallel_Programming
             setup();
             try
             {
-                Parallel.For(0, Validation.MaxPasswordLength, parallelOptions, ((int i, ParallelLoopState state) =>
+                // Create password of every length 
+                Parallel.For(Validation.MinPasswordLength, Validation.MaxPasswordLength, parallelOptions, ((int i, ParallelLoopState state) =>
                 {
                     if (cancellationTokenSource.Token.IsCancellationRequested)
                     {
@@ -188,6 +189,7 @@ namespace A1_Parallel_Programming
                 return false;
             }
 
+            // Add every character to the prefix and pass on until length is 0.
             for (int i = 0; i < Alphabet.Count; ++i)
             {
                 String newPrefix = prefix + Alphabet[i];
