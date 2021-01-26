@@ -70,13 +70,13 @@ namespace A1_Parallel_Programming
                 return false;
             }
 
-            if (password.All(c => !Char.IsLetter(c)))
+            if (!password.All(c => Char.IsLetter(c)))
             {
                 Console.WriteLine("The password must be all letters (No symbols or numbers).\n");
                 return false;
             }
 
-            if (password.All(c => !Char.IsUpper(c)))
+            if (!password.All(c => Char.IsUpper(c)))
             {
                 Console.WriteLine("The password must be all UPPER-CASE.\n");
                 return false;

@@ -116,7 +116,6 @@ namespace A1_Parallel_Programming
             }
             catch (OperationCanceledException)
             {
-                Console.WriteLine("Parallel tasks cancelled.");
             }
             finally
             {
