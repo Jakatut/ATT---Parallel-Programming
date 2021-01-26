@@ -214,7 +214,7 @@ namespace A1_Parallel_Programming
         /// <returns>bool - true if the elapsed tiem is at or passed the time limit.</returns>
         private static bool isElapsedTimeAtOrPastLimit()
         {
-            if (runningTime.ElapsedMilliseconds >= timeLimit.TotalMilliseconds)
+            if (running && runningTime.ElapsedMilliseconds >= timeLimit.TotalMilliseconds)
             {
                 // Just to make output look a little better. Really, this will go past a few ms, but no comparisons are made.
                 elapsedTime = timeLimit;
