@@ -23,7 +23,6 @@ namespace A1_Parallel_Programming
         private static TimeSpan timeLimit = new TimeSpan();
         private static TimeSpan elapsedTime = new TimeSpan();
         private static Stopwatch runningTime = new Stopwatch();
-        private static System.Timers.Timer timer;
 
         public static void Main(string[] args)
         {
