@@ -18,7 +18,7 @@ namespace A1_Parallel_Programming
         private static List<char> Alphabet = new List<char>();
         private static String password = "";
         private static String crackedPassword = "";
-        private static int count = 0;
+        private static long count = 0;
 
         private static TimeSpan timeLimit = new TimeSpan();
         private static TimeSpan elapsedTime = new TimeSpan();
@@ -53,8 +53,9 @@ namespace A1_Parallel_Programming
         private static void setup()
         {
             running = true;
-            runningTime.Reset();
+            runningTime.Restart();
             count = 0;
+            runningTime = Stopwatch.StartNew();
         }
 
 
@@ -132,7 +133,6 @@ namespace A1_Parallel_Programming
         /// <returns>bool - True if a match was found.</returns>
         private static bool runCombinationMatch(int length)
         {
-            runningTime = Stopwatch.StartNew();
             if (findMatchingCombination("", length))
             {
                 elapsedTime = runningTime.Elapsed;
@@ -179,6 +179,7 @@ namespace A1_Parallel_Programming
                     // Break out of recursion if it does.
                     if (prefix != "" && prefix == password)
                     {
+                        elapsedTime = runningTime.Elapsed;
                         running = false;
                         crackedPassword = prefix;
                         return true;
@@ -214,7 +215,6 @@ namespace A1_Parallel_Programming
         {
             if (running && runningTime.ElapsedMilliseconds >= timeLimit.TotalMilliseconds)
             {
-                // Just to make output look a little better. Really, this will go past a few ms, but no comparisons are made.
                 elapsedTime = timeLimit;
                 running = false;
                 return true;
@@ -235,7 +235,7 @@ namespace A1_Parallel_Programming
                 Console.WriteLine("Match found!");
                 Console.WriteLine("Password: " + crackedPassword);
             }
-            Console.WriteLine("Elapsed time: {0}", elapsedTime);
+            Console.WriteLine("Elapsed time: {0}\n", elapsedTime);
             Console.WriteLine("Comparison count: {0}\n", count);
         }
     }
